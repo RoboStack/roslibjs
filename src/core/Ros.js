@@ -3,7 +3,7 @@
  * @author Brandon Alexander - baalexander@gmail.com
  */
 
-var WebSocket = require('ws');
+// var WebSocket = WebSocket;
 var WorkerSocket = require('../util/workerSocket');
 var socketAdapter = require('./SocketAdapter.js');
 

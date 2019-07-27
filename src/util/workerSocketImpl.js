@@ -1,4 +1,4 @@
-var WebSocket = WebSocket || require('ws');
+var WebSocket = WebSocket; // || require('ws');
 
 module.exports = function(self) {
   var socket = null;
