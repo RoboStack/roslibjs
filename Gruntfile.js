@@ -16,15 +16,6 @@ module.exports = function(grunt) {
         dest: './build/roslib.js'
       }
     },
-    jshint: {
-      options: {
-        jshintrc: true
-      },
-      files: [
-        './Gruntfile.js',
-        './src/**/*.js'
-      ]
-    },
     karma: {
       build: {
         configFile: './test/karma.conf.js',
@@ -98,7 +89,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('dev', ['browserify', 'watch']);
-  grunt.registerTask('test', ['jshint', 'mochaTest:test', 'browserify', 'karma']);
+  grunt.registerTask('test', [ 'mochaTest:test', 'browserify', 'karma']);
   grunt.registerTask('build', ['test', 'uglify']);
   grunt.registerTask('build_and_watch', ['watch']);
   grunt.registerTask('doc', ['clean', 'jsdoc']);

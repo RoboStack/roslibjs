@@ -2235,7 +2235,7 @@ module.exports = Param;
  * @author Brandon Alexander - baalexander@gmail.com
  */
 
-var WebSocket = require('ws');
+// var WebSocket = WebSocket;
 var WorkerSocket = require('../util/workerSocket');
 var socketAdapter = require('./SocketAdapter.js');
 
@@ -2859,7 +2859,7 @@ Ros.prototype.decodeTypeDefs = function(defs) {
 
 module.exports = Ros;
 
-},{"../util/workerSocket":47,"./Service":16,"./ServiceRequest":17,"./SocketAdapter.js":19,"eventemitter2":2,"object-assign":3,"ws":43}],16:[function(require,module,exports){
+},{"../util/workerSocket":46,"./Service":16,"./ServiceRequest":17,"./SocketAdapter.js":19,"eventemitter2":2,"object-assign":3}],16:[function(require,module,exports){
 /**
  * @fileoverview
  * @author Brandon Alexander - baalexander@gmail.com
@@ -3145,7 +3145,7 @@ function SocketAdapter(client) {
 
 module.exports = SocketAdapter;
 
-},{"../util/cborTypedArrayTags":42,"../util/decompressPng":45,"cbor-js":1}],20:[function(require,module,exports){
+},{"../util/cborTypedArrayTags":42,"../util/decompressPng":44,"cbor-js":1}],20:[function(require,module,exports){
 /**
  * @fileoverview
  * @author Brandon Alexander - baalexander@gmail.com
@@ -4280,7 +4280,7 @@ function UrdfModel(options) {
 
 module.exports = UrdfModel;
 
-},{"./UrdfJoint":33,"./UrdfLink":34,"./UrdfMaterial":35,"xmldom":46}],38:[function(require,module,exports){
+},{"./UrdfJoint":33,"./UrdfLink":34,"./UrdfMaterial":35,"xmldom":45}],38:[function(require,module,exports){
 /**
  * @fileOverview 
  * @author Benjamin Pitzer - ben.pitzer@gmail.com
@@ -4573,14 +4573,11 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 },{}],43:[function(require,module,exports){
-module.exports = typeof window !== 'undefined' ? window.WebSocket : WebSocket;
-
-},{}],44:[function(require,module,exports){
 /* global document */
 module.exports = function Canvas() {
 	return document.createElement('canvas');
 };
-},{}],45:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 /**
  * @fileOverview
  * @author Graeme Yeates - github.com/megawac
@@ -4638,12 +4635,12 @@ function decompressPng(data, callback) {
 
 module.exports = decompressPng;
 
-},{"canvas":44}],46:[function(require,module,exports){
+},{"canvas":43}],45:[function(require,module,exports){
 exports.DOMImplementation = window.DOMImplementation;
 exports.XMLSerializer = window.XMLSerializer;
 exports.DOMParser = window.DOMParser;
 
-},{}],47:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 var work = require('webworkify');
 var workerSocketImpl = require('./workerSocketImpl');
 
@@ -4689,8 +4686,8 @@ WorkerSocket.prototype.close = function() {
 
 module.exports = WorkerSocket;
 
-},{"./workerSocketImpl":48,"webworkify":5}],48:[function(require,module,exports){
-var WebSocket = WebSocket || require('ws');
+},{"./workerSocketImpl":47,"webworkify":5}],47:[function(require,module,exports){
+// var WebSocket = WebSocket;
 
 module.exports = function(self) {
   var socket = null;
@@ -4739,4 +4736,4 @@ module.exports = function(self) {
   });
 };
 
-},{"ws":43}]},{},[7]);
+},{}]},{},[7]);
