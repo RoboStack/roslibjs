@@ -1,8 +1,8 @@
 {
-  "name": "roslib",
+  "name": "@RoboStack/roslib",
   "homepage": "https://www.robotwebtools.org",
   "description": "The standard ROS Javascript Library",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "BSD-2-Clause",
   "main": "./src/RosLibNode.js",
   "browser": {
@@ -33,14 +33,14 @@
     "time-grunt": "^1.0.0"
   },
   "dependencies": {
+    "cbor-js": "^0.1.0",
     "eventemitter2": "^4.1.0",
     "object-assign": "^4.0.1",
     "pngparse": "^2.0.1",
+    "socket.io": "2.2.0",
+    "webworkify-webpack": "^2.1.5",
     "ws": "^7.2.1",
-    "xmldom": "^0.1.19",
-    "cbor-js": "^0.1.0",
-    "webworkify": "^1.5.0",
-    "socket.io": "2.2.0"
+    "xmldom": "^0.1.19"
   },
   "directories": {
     "example": "examples",
