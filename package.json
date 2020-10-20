@@ -1,5 +1,5 @@
 {
-  "name": "@RoboStack/roslib",
+  "name": "@robostack/roslib",
   "homepage": "https://www.robotwebtools.org",
   "description": "The standard ROS Javascript Library",
   "version": "1.1.1",
