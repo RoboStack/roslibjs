@@ -8,9 +8,9 @@
  */
 'use strict';
 
-var decompressPng = require('../util/decompressPng');
-var CBOR = require('cbor-js');
-var typedArrayTagger = require('../util/cborTypedArrayTags');
+import decompressPng from '../util/decompressPng';
+import CBOR from 'cbor-js';
+import typedArrayTagger from '../util/cborTypedArrayTags';
 var BSON = null;
 if(typeof bson !== 'undefined'){
     BSON = bson().BSON;
@@ -118,4 +118,4 @@ function SocketAdapter(client) {
   };
 }
 
-module.exports = SocketAdapter;
+export default SocketAdapter;

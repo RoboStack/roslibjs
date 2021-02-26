@@ -1,5 +1,5 @@
-var Topic = require('../core/Topic');
-var DuplexStream = require('stream').Duplex;
+import Topic from '../core/Topic';
+import { Duplex as DuplexStream } from 'stream';
 
 /**
  * Publish a connected ROS topic to a duplex
@@ -23,7 +23,7 @@ Topic.prototype.toStream = function(options) {
         objectMode: true
     });
     stream._read = function() {};
-    
+
     // Publish to the topic if someone pipes to stream
     stream._write = function(chunk, encoding, callback) {
         if (hasTransform) {
@@ -34,7 +34,7 @@ Topic.prototype.toStream = function(options) {
         }
         callback();
     };
-    
+
     if (options.subscribe) {
         this.subscribe(function(message) {
             stream.push(message);
@@ -49,4 +49,4 @@ Topic.prototype.toStream = function(options) {
     return stream;
 };
 
-module.exports = Topic;
+export default Topic;

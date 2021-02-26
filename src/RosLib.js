@@ -8,21 +8,22 @@
  *
  * If you use nodejs, this is the variable you get when you require('roslib')
  */
-var ROSLIB = this.ROSLIB || {
+
+import core from './core';
+import actionlib from './actionlib';
+import math from './math';
+import tf from './tf';
+import urdf from './urdf';
+
+var ROSLIB = {
   REVISION : '1.1.0'
 };
 
-var assign = require('object-assign');
-
-// Add core components
-assign(ROSLIB, require('./core'));
-
-assign(ROSLIB, require('./actionlib'));
-
-assign(ROSLIB, require('./math'));
-
-assign(ROSLIB, require('./tf'));
-
-assign(ROSLIB, require('./urdf'));
-
-module.exports = ROSLIB;
+export default {
+  ...ROSLIB,
+  ...core,
+  ...actionlib,
+  ...math,
+  ...tf,
+  ...urdf
+};

@@ -1,11 +1,23 @@
-module.exports = require('object-assign')({
-    UrdfBox: require('./UrdfBox'),
-    UrdfColor: require('./UrdfColor'),
-    UrdfCylinder: require('./UrdfCylinder'),
-    UrdfLink: require('./UrdfLink'),
-    UrdfMaterial: require('./UrdfMaterial'),
-    UrdfMesh: require('./UrdfMesh'),
-    UrdfModel: require('./UrdfModel'),
-    UrdfSphere: require('./UrdfSphere'),
-    UrdfVisual: require('./UrdfVisual')
-}, require('./UrdfTypes'));
+import UrdfTypes from './UrdfTypes';
+import UrdfBox from './UrdfBox';
+import UrdfColor from './UrdfColor';
+import UrdfCylinder from './UrdfCylinder';
+import UrdfLink from './UrdfLink';
+import UrdfMaterial from './UrdfMaterial';
+import UrdfMesh from './UrdfMesh';
+import UrdfModel from './UrdfModel';
+import UrdfSphere from './UrdfSphere';
+import UrdfVisual from './UrdfVisual';
+
+export default {
+    UrdfBox,
+    UrdfColor,
+    UrdfCylinder,
+    UrdfLink,
+    UrdfMaterial,
+    UrdfMesh,
+    UrdfModel,
+    UrdfSphere,
+    UrdfVisual,
+    ...UrdfTypes,
+}

@@ -1,8 +1,7 @@
-var work = require('webworkify');
-var workerSocketImpl = require('./workerSocketImpl');
+import WorkerSocketImpl from 'web-worker:./workerSocketImpl';
 
 function WorkerSocket(uri) {
-  this.socket_ = work(workerSocketImpl);
+  this.socket_ = new WorkerSocketImpl();
 
   this.socket_.addEventListener('message', this.handleWorkerMessage_.bind(this));
 
@@ -41,4 +40,4 @@ WorkerSocket.prototype.close = function() {
   });
 };
 
-module.exports = WorkerSocket;
+export default WorkerSocket;

@@ -1,11 +1,11 @@
 /**
- * @fileOverview 
+ * @fileOverview
  * @author Benjamin Pitzer - ben.pitzer@gmail.com
  * @author Russell Toris - rctoris@wpi.edu
  */
 
-var Vector3 = require('../math/Vector3');
-var UrdfTypes = require('./UrdfTypes');
+import Vector3 from '../math/Vector3';
+import UrdfTypes from './UrdfTypes';
 
 /**
  * A Box element in a URDF.
@@ -27,4 +27,4 @@ function UrdfBox(options) {
   });
 }
 
-module.exports = UrdfBox;
+export default UrdfBox;

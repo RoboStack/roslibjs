@@ -5,7 +5,7 @@
 
 'use strict';
 
-var Canvas = require('canvas');
+import Canvas from 'canvas';
 var Image = Canvas.Image || window.Image;
 
 /**
@@ -53,4 +53,4 @@ function decompressPng(data, callback) {
   image.src = 'data:image/png;base64,' + data;
 }
 
-module.exports = decompressPng;
+export default decompressPng;

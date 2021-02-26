@@ -1,8 +1,11 @@
-var Ros = require('../core/Ros');
-var mixin = require('../mixin');
+import Ros from '../core/Ros';
+import mixin from '../mixin';
+import TFClient from './TFClient';
 
-var tf = module.exports = {
-    TFClient: require('./TFClient')
+const tf = {
+    TFClient
 };
 
 mixin(Ros, ['TFClient'], tf);
+
+export default tf;

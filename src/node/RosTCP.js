@@ -1,8 +1,8 @@
-var Ros = require('../core/Ros');
-var SocketIO = require('./SocketIO');
-var net = require('net');
-var socketAdapter = require('../core/SocketAdapter.js');
-var util = require('util');
+import Ros from '../core/Ros';
+import SocketIO from './SocketIO';
+import net from 'net';
+import socketAdapter from '../core/SocketAdapter.js';
+import util from 'util';
 
 /**
  * Same as core Ros except supports TCP connections
@@ -58,4 +58,4 @@ RosTCP.prototype.connect = function(url) {
   }
 };
 
-module.exports = RosTCP;
+export default RosTCP;

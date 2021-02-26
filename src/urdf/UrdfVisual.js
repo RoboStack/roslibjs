@@ -1,18 +1,18 @@
 /**
- * @fileOverview 
+ * @fileOverview
  * @author Benjamin Pitzer - ben.pitzer@gmail.com
  * @author Russell Toris - rctoris@wpi.edu
  */
 
-var Pose = require('../math/Pose');
-var Vector3 = require('../math/Vector3');
-var Quaternion = require('../math/Quaternion');
+import Pose from '../math/Pose';
+import Quaternion from '../math/Quaternion';
+import Vector3 from '../math/Vector3';
 
-var UrdfCylinder = require('./UrdfCylinder');
-var UrdfBox = require('./UrdfBox');
-var UrdfMaterial = require('./UrdfMaterial');
-var UrdfMesh = require('./UrdfMesh');
-var UrdfSphere = require('./UrdfSphere');
+import UrdfCylinder from './UrdfCylinder';
+import UrdfBox from './UrdfBox';
+import UrdfMaterial from './UrdfMaterial';
+import UrdfMesh from './UrdfMesh';
+import UrdfSphere from './UrdfSphere';
 
 /**
  * A Visual element in a URDF.
@@ -127,4 +127,4 @@ function UrdfVisual(options) {
   }
 }
 
-module.exports = UrdfVisual;
+export default UrdfVisual;

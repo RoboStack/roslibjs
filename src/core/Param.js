@@ -3,8 +3,8 @@
  * @author Brandon Alexander - baalexander@gmail.com
  */
 
-var Service = require('./Service');
-var ServiceRequest = require('./ServiceRequest');
+import Service from './Service';
+import ServiceRequest from './ServiceRequest';
 
 /**
  * A ROS parameter.
@@ -14,70 +14,72 @@ var ServiceRequest = require('./ServiceRequest');
  *   * ros - the ROSLIB.Ros connection handle
  *   * name - the param name, like max_vel_x
  */
-function Param(options) {
-  options = options || {};
-  this.ros = options.ros;
-  this.name = options.name;
+class Param {
+  constructor(options) {
+    options = options || {};
+    this.ros = options.ros;
+    this.name = options.name;
+  }
+
+  /**
+   * Fetches the value of the param.
+   *
+   * @param callback - function with the following params:
+   *  * value - the value of the param from ROS.
+   */
+  get = (callback) => {
+    const paramClient = new Service({
+      ros : this.ros,
+      name : '/rosapi/get_param',
+      serviceType : 'rosapi/GetParam'
+    });
+
+    const request = new ServiceRequest({
+      name : this.name
+    });
+
+    paramClient.callService(request, (result) => {
+      const value = JSON.parse(result.value);
+      callback(value);
+    });
+  };
+
+  /**
+   * Sets the value of the param in ROS.
+   *
+   * @param value - value to set param to.
+   */
+  set = (value, callback) => {
+    const paramClient = new Service({
+      ros : this.ros,
+      name : '/rosapi/set_param',
+      serviceType : 'rosapi/SetParam'
+    });
+
+    const request = new ServiceRequest({
+      name : this.name,
+      value : JSON.stringify(value)
+    });
+
+    paramClient.callService(request, callback);
+  };
+
+  /**
+   * Delete this parameter on the ROS server.
+   */
+  delete = (callback) => {
+    const paramClient = new Service({
+      ros : this.ros,
+      name : '/rosapi/delete_param',
+      serviceType : 'rosapi/DeleteParam'
+    });
+
+    const request = new ServiceRequest({
+      name : this.name
+    });
+
+    paramClient.callService(request, callback);
+  };
 }
 
-/**
- * Fetches the value of the param.
- *
- * @param callback - function with the following params:
- *  * value - the value of the param from ROS.
- */
-Param.prototype.get = function(callback) {
-  var paramClient = new Service({
-    ros : this.ros,
-    name : '/rosapi/get_param',
-    serviceType : 'rosapi/GetParam'
-  });
-
-  var request = new ServiceRequest({
-    name : this.name
-  });
-
-  paramClient.callService(request, function(result) {
-    var value = JSON.parse(result.value);
-    callback(value);
-  });
-};
-
-/**
- * Sets the value of the param in ROS.
- *
- * @param value - value to set param to.
- */
-Param.prototype.set = function(value, callback) {
-  var paramClient = new Service({
-    ros : this.ros,
-    name : '/rosapi/set_param',
-    serviceType : 'rosapi/SetParam'
-  });
-
-  var request = new ServiceRequest({
-    name : this.name,
-    value : JSON.stringify(value)
-  });
-
-  paramClient.callService(request, callback);
-};
-
-/**
- * Delete this parameter on the ROS server.
- */
-Param.prototype.delete = function(callback) {
-  var paramClient = new Service({
-    ros : this.ros,
-    name : '/rosapi/delete_param',
-    serviceType : 'rosapi/DeleteParam'
-  });
-
-  var request = new ServiceRequest({
-    name : this.name
-  });
-
-  paramClient.callService(request, callback);
-};
-
-module.exports = Param;
+export default Param;
