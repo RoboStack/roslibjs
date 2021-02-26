@@ -3,9 +3,8 @@
  * @author Brandon Alexander - baalexander@gmail.com
  */
 
-var ServiceResponse = require('./ServiceResponse');
-var ServiceRequest = require('./ServiceRequest');
-var EventEmitter2 = require('eventemitter2').EventEmitter2;
+import ServiceResponse from './ServiceResponse';
+import EventEmitter2 from 'events';
 
 /**
  * A ROS service client.
@@ -120,4 +119,4 @@ Service.prototype._serviceResponse = function(rosbridgeRequest) {
   this.ros.callOnConnection(call);
 };
 
-module.exports = Service;
+export default Service;

@@ -1,10 +1,10 @@
 /**
- * @fileOverview 
+ * @fileOverview
  * @author Benjamin Pitzer - ben.pitzer@gmail.com
  * @author Russell Toris - rctoris@wpi.edu
  */
 
-var UrdfVisual = require('./UrdfVisual');
+import UrdfVisual from './UrdfVisual';
 
 /**
  * A Link element in a URDF.
@@ -25,4 +25,4 @@ function UrdfLink(options) {
   }
 }
 
-module.exports = UrdfLink;
+export default UrdfLink;

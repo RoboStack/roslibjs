@@ -1,10 +1,10 @@
 /**
- * @fileOverview 
+ * @fileOverview
  * @author Benjamin Pitzer - ben.pitzer@gmail.com
  * @author Russell Toris - rctoris@wpi.edu
  */
 
-var UrdfColor = require('./UrdfColor');
+import UrdfColor from './UrdfColor';
 
 /**
  * A Material element in a URDF.
@@ -39,10 +39,8 @@ UrdfMaterial.prototype.isLink = function() {
   return this.color === null && this.textureFilename === null;
 };
 
-var assign = require('object-assign');
-
 UrdfMaterial.prototype.assign = function(obj) {
-    return assign(this, obj);
+    return Object.assign(this, obj);
 };
 
-module.exports = UrdfMaterial;
+export default UrdfMaterial;

@@ -3,8 +3,8 @@
  * @author David Gossow - dgossow@willowgarage.com
  */
 
-var Vector3 = require('./Vector3');
-var Quaternion = require('./Quaternion');
+import Vector3 from './Vector3';
+import Quaternion from './Quaternion';
 
 /**
  * A Transform in 3-space. Values are copied into this object.
@@ -30,4 +30,4 @@ Transform.prototype.clone = function() {
   return new Transform(this);
 };
 
-module.exports = Transform;
+export default Transform;

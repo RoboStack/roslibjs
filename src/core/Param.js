@@ -3,8 +3,8 @@
  * @author Brandon Alexander - baalexander@gmail.com
  */
 
-var Service = require('./Service');
-var ServiceRequest = require('./ServiceRequest');
+import Service from './Service';
+import ServiceRequest from './ServiceRequest';
 
 /**
  * A ROS parameter.
@@ -80,4 +80,4 @@ Param.prototype.delete = function(callback) {
   paramClient.callService(request, callback);
 };
 
-module.exports = Param;
+export default Param;

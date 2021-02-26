@@ -1,11 +1,18 @@
-var Ros = require('../core/Ros');
-var mixin = require('../mixin');
+import Ros from '../core/Ros';
+import mixin from '../mixin';
 
-var action = module.exports = {
-    ActionClient: require('./ActionClient'),
-    ActionListener: require('./ActionListener'),
-    Goal: require('./Goal'),
-    SimpleActionServer: require('./SimpleActionServer')
+import ActionClient from './ActionClient';
+import ActionListener from './ActionListener';
+import Goal from './Goal';
+import SimpleActionServer from './SimpleActionServer';
+
+const action = {
+    ActionClient,
+    ActionListener,
+    Goal,
+    SimpleActionServer
 };
 
 mixin(Ros, ['ActionClient', 'SimpleActionServer'], action);
+
+export default action;

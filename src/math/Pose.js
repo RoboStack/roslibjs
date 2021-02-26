@@ -3,8 +3,8 @@
  * @author David Gossow - dgossow@willowgarage.com
  */
 
-var Vector3 = require('./Vector3');
-var Quaternion = require('./Quaternion');
+import Vector3 from './Vector3';
+import Quaternion from './Quaternion';
 
 /**
  * A Pose in 3D space. Values are copied into this object.
@@ -69,4 +69,4 @@ Pose.prototype.getInverse = function() {
   return inverse;
 };
 
-module.exports = Pose;
+export default Pose;

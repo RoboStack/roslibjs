@@ -1,5 +1,5 @@
 /**
- * @fileOverview 
+ * @fileOverview
  * @author Benjamin Pitzer - ben.pitzer@gmail.com
  * @author Russell Toris - rctoris@wpi.edu
  */
@@ -20,4 +20,4 @@ function UrdfColor(options) {
   this.a = parseFloat(rgba[3]);
 }
 
-module.exports = UrdfColor;
+export default UrdfColor;

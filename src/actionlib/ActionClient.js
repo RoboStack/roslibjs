@@ -3,9 +3,9 @@
  * @author Russell Toris - rctoris@wpi.edu
  */
 
-var Topic = require('../core/Topic');
-var Message = require('../core/Message');
-var EventEmitter2 = require('eventemitter2').EventEmitter2;
+import Topic from '../core/Topic';
+import Message from '../core/Message';
+import EventEmitter2 from 'events';
 
 /**
  * An actionlib action client.
@@ -140,4 +140,4 @@ ActionClient.prototype.dispose = function() {
   if (!this.omitResult) {this.resultListener.unsubscribe();}
 };
 
-module.exports = ActionClient;
+export default ActionClient;

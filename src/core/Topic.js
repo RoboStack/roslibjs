@@ -3,8 +3,8 @@
  * @author Brandon Alexander - baalexander@gmail.com
  */
 
-var EventEmitter2 = require('eventemitter2').EventEmitter2;
-var Message = require('./Message');
+import EventEmitter2 from 'events';
+import Message from './Message';
 
 /**
  * Publish and/or subscribe to a topic in ROS.
@@ -205,4 +205,4 @@ Topic.prototype.publish = function(message) {
   this.ros.callOnConnection(call);
 };
 
-module.exports = Topic;
+export default Topic;

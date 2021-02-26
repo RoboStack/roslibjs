@@ -65,4 +65,4 @@ Vector3.prototype.clone = function() {
   return new Vector3(this);
 };
 
-module.exports = Vector3;
+export default Vector3;

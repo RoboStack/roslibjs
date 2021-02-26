@@ -1,9 +1,12 @@
 /**
- * @fileOverview ROSLIB Node exclusive extensions 
+ * @fileOverview ROSLIB Node exclusive extensions
  */
-var assign = require('object-assign');
+import ROSLIB from './RosLib';
+import RosTCP from './node/RosTCP';
+import TopicStream from './node/TopicStream';
 
-module.exports = assign(require('./RosLib'), {
-  Ros: require('./node/RosTCP.js'),
-  Topic: require('./node/TopicStream')
-});
+export default {
+  ...ROSLIB,
+  Ros: RosTCP,
+  Topic: TopicStream,
+};

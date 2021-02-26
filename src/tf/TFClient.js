@@ -3,14 +3,14 @@
  * @author David Gossow - dgossow@willowgarage.com
  */
 
-var ActionClient = require('../actionlib/ActionClient');
-var Goal = require('../actionlib/Goal');
+import ActionClient from '../actionlib/ActionClient';
+import Goal from '../actionlib/Goal';
 
-var Service = require('../core/Service.js');
-var ServiceRequest = require('../core/ServiceRequest.js');
-var Topic = require('../core/Topic.js');
+import Service from '../core/Service.js';
+import ServiceRequest from '../core/ServiceRequest.js';
+import Topic from '../core/Topic.js';
 
-var Transform = require('../math/Transform');
+import Transform from '../math/Transform';
 
 /**
  * A TF Client that listens to TFs from tf2_web_republisher.
@@ -222,4 +222,4 @@ TFClient.prototype.dispose = function() {
   }
 };
 
-module.exports = TFClient;
+export default TFClient;

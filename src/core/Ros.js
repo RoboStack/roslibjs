@@ -3,15 +3,15 @@
  * @author Brandon Alexander - baalexander@gmail.com
  */
 
-var WebSocket = require('ws');
-var WorkerSocket = require('../util/workerSocket');
-var socketAdapter = require('./SocketAdapter.js');
+import WebSocket from 'ws';
 
-var Service = require('./Service');
-var ServiceRequest = require('./ServiceRequest');
+import WorkerSocket from '../util/workerSocket';
+import socketAdapter from './SocketAdapter.js';
 
-var assign = require('object-assign');
-var EventEmitter2 = require('eventemitter2').EventEmitter2;
+import Service from './Service';
+import ServiceRequest from './ServiceRequest';
+
+import EventEmitter2 from 'events';
 
 /**
  * Manages connection to the server and all interactions with ROS.
@@ -46,7 +46,8 @@ function Ros(options) {
   }
 
   // Sets unlimited event listeners.
-  this.setMaxListeners(0);
+  // TODO: Uncomment and check
+  // this.setMaxListeners(0);
 
   // begin by checking if a URL was given
   if (options.url) {
@@ -63,21 +64,21 @@ Ros.prototype.__proto__ = EventEmitter2.prototype;
  */
 Ros.prototype.connect = function(url) {
   if (this.transportLibrary === 'socket.io') {
-    this.socket = assign(io(url, {'force new connection': true}), socketAdapter(this));
+    this.socket = Object.assign(io(url, {'force new connection': true}), socketAdapter(this));
     this.socket.on('connect', this.socket.onopen);
     this.socket.on('data', this.socket.onmessage);
     this.socket.on('close', this.socket.onclose);
     this.socket.on('error', this.socket.onerror);
   } else if (this.transportLibrary.constructor.name === 'RTCPeerConnection') {
-    this.socket = assign(this.transportLibrary.createDataChannel(url, this.transportOptions), socketAdapter(this));
+    this.socket = Object.assign(this.transportLibrary.createDataChannel(url, this.transportOptions), socketAdapter(this));
   } else if (this.transportLibrary === 'websocket') {
     if (!this.socket || this.socket.readyState === WebSocket.CLOSED) {
       var sock = new WebSocket(url);
       sock.binaryType = 'arraybuffer';
-      this.socket = assign(sock, socketAdapter(this));
+      this.socket = Object.assign(sock, socketAdapter(this));
     }
   } else if (this.transportLibrary === 'workersocket') {
-    this.socket = assign(new WorkerSocket(url), socketAdapter(this));
+    this.socket = Object.assign(new WorkerSocket(url), socketAdapter(this));
   } else {
     throw 'Unknown transportLibrary: ' + this.transportLibrary.toString();
   }
@@ -688,4 +689,4 @@ Ros.prototype.getTopicsAndRawTypes = function(callback, failedCallback) {
 };
 
 
-module.exports = Ros;
+export default Ros;

@@ -89,4 +89,4 @@ Quaternion.prototype.clone = function() {
   return new Quaternion(this);
 };
 
-module.exports = Quaternion;
+export default Quaternion;

@@ -1,1 +1,3 @@
-module.exports = typeof window !== 'undefined' ? window.WebSocket : WebSocket;
+const ws = typeof window !== 'undefined' ? window.WebSocket : WebSocket;
+
+export default ws;

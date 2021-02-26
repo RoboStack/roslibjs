@@ -1,11 +1,11 @@
 /**
- * @fileOverview 
+ * @fileOverview
  * @author Benjamin Pitzer - ben.pitzer@gmail.com
  * @author Russell Toris - rctoris@wpi.edu
  */
 
-var Vector3 = require('../math/Vector3');
-var UrdfTypes = require('./UrdfTypes');
+import Vector3 from '../math/Vector3';
+import UrdfTypes from './UrdfTypes';
 
 /**
  * A Mesh element in a URDF.
@@ -33,4 +33,4 @@ function UrdfMesh(options) {
   }
 }
 
-module.exports = UrdfMesh;
+export default UrdfMesh;

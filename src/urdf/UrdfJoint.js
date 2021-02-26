@@ -3,9 +3,9 @@
  * @author David V. Lu!!  davidvlu@gmail.com
  */
 
-var Pose = require('../math/Pose');
-var Vector3 = require('../math/Vector3');
-var Quaternion = require('../math/Quaternion');
+import Pose from '../math/Pose';
+import Quaternion from '../math/Quaternion';
+import Vector3 from '../math/Vector3';
 
 /**
  * A Joint element in a URDF.
@@ -88,4 +88,4 @@ function UrdfJoint(options) {
   }
 }
 
-module.exports = UrdfJoint;
+export default UrdfJoint;

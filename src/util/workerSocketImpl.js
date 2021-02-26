@@ -1,6 +1,8 @@
-var WebSocket = WebSocket || require('ws');
+import ws from 'ws';
 
-module.exports = function(self) {
+const WebSocket = WebSocket || ws;
+
+function WorkerSocketImpl(self) {
   var socket = null;
 
   function handleSocketMessage(ev) {
@@ -46,3 +48,5 @@ module.exports = function(self) {
     }
   });
 };
+
+export default WorkerSocketImpl;

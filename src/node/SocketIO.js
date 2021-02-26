@@ -1,4 +1,4 @@
-var io = require('socket.io');
+import io from 'socket.io';
 
 function SocketIO(options, Ros){
     this.socketio = null;
@@ -35,4 +35,4 @@ SocketIO.prototype.sendToRosbridge = function(msg){
     this.socket.send(msg);
 };
 
-module.exports = SocketIO;
+export default SocketIO;

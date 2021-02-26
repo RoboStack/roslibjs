@@ -3,9 +3,9 @@
  * @author Laura Lindzey - lindzey@gmail.com
  */
 
-var Topic = require('../core/Topic');
-var Message = require('../core/Message');
-var EventEmitter2 = require('eventemitter2').EventEmitter2;
+import Topic from '../core/Topic';
+import Message from '../core/Message';
+import EventEmitter2 from 'events';
 
 /**
  * An actionlib action server client.
@@ -77,7 +77,7 @@ function SimpleActionServer(options) {
     this.nextGoal = null; // the one that'll be preempting
 
     goalListener.subscribe(function(goalMessage) {
-        
+
     if(that.currentGoal) {
             that.nextGoal = goalMessage;
             // needs to happen AFTER rest is set up
@@ -128,7 +128,7 @@ function SimpleActionServer(options) {
             }
             if(that.currentGoal && isEarlier(that.currentGoal.goal_id.stamp,
                                              cancelMessage.stamp)) {
-                
+
                 that.emit('cancel');
             }
         }
@@ -153,7 +153,7 @@ SimpleActionServer.prototype.__proto__ = EventEmitter2.prototype;
 */
 
 SimpleActionServer.prototype.setSucceeded = function(result2) {
-    
+
 
     var resultMessage = new Message({
         status : {goal_id : this.currentGoal.goal_id, status : 3},
@@ -226,4 +226,4 @@ SimpleActionServer.prototype.setPreempted = function() {
     }
 };
 
-module.exports = SimpleActionServer;
+export default SimpleActionServer;

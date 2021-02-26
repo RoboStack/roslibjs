@@ -4,8 +4,8 @@
  */
 
 'use strict';
-
-var pngparse = require('pngparse');
+import * as pngjs from 'pngjs/browser';
+const { PNG } = pngjs;
 
 /**
  * If a message was compressed as a PNG image (a compression hack since
@@ -20,7 +20,7 @@ var pngparse = require('pngparse');
 function decompressPng(data, callback) {
   var buffer = new Buffer(data, 'base64');
 
-  pngparse.parse(buffer, function(err, data) {
+  PNG.decode(buffer, function(err, data) {
     if(err) {
       console.warn('Cannot process PNG encoded message ');
     } else {
@@ -30,4 +30,4 @@ function decompressPng(data, callback) {
   });
 }
 
-module.exports = decompressPng;
+export default decompressPng;

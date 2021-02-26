@@ -113,6 +113,4 @@ function cborTypedArrayTagger(data, tag) {
   return data;
 }
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = cborTypedArrayTagger;
-}
+export default cborTypedArrayTagger;

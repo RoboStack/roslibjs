@@ -3,8 +3,8 @@
  * @author Russell Toris - rctoris@wpi.edu
  */
 
-var Message = require('../core/Message');
-var EventEmitter2 = require('eventemitter2').EventEmitter2;
+import Message from '../core/Message';
+import EventEmitter2 from 'events';
 
 /**
  * An actionlib goal goal is associated with an action server.
@@ -86,4 +86,4 @@ Goal.prototype.cancel = function() {
   this.actionClient.cancelTopic.publish(cancelMessage);
 };
 
-module.exports = Goal;
+export default Goal;
