@@ -21,66 +21,64 @@ import EventEmitter2 from 'events';
  *   * serverName - the action server name, like /fibonacci
  *   * actionName - the action message name, like 'actionlib_tutorials/FibonacciAction'
  */
-function ActionListener(options) {
-  var that = this;
-  options = options || {};
-  this.ros = options.ros;
-  this.serverName = options.serverName;
-  this.actionName = options.actionName;
-  this.timeout = options.timeout;
-  this.omitFeedback = options.omitFeedback;
-  this.omitStatus = options.omitStatus;
-  this.omitResult = options.omitResult;
+class ActionListener extends EventEmitter2 {
+  constructor(options) {
+    super();
+    options = options || {};
+    this.ros = options.ros;
+    this.serverName = options.serverName;
+    this.actionName = options.actionName;
+    this.timeout = options.timeout;
+    this.omitFeedback = options.omitFeedback;
+    this.omitStatus = options.omitStatus;
+    this.omitResult = options.omitResult;
 
+    // create the topics associated with actionlib
+    const goalListener = new Topic({
+      ros : this.ros,
+      name : this.serverName + '/goal',
+      messageType : this.actionName + 'Goal'
+    });
 
-  // create the topics associated with actionlib
-  var goalListener = new Topic({
-    ros : this.ros,
-    name : this.serverName + '/goal',
-    messageType : this.actionName + 'Goal'
-  });
+    const feedbackListener = new Topic({
+      ros : this.ros,
+      name : this.serverName + '/feedback',
+      messageType : this.actionName + 'Feedback'
+    });
 
-  var feedbackListener = new Topic({
-    ros : this.ros,
-    name : this.serverName + '/feedback',
-    messageType : this.actionName + 'Feedback'
-  });
+    const statusListener = new Topic({
+      ros : this.ros,
+      name : this.serverName + '/status',
+      messageType : 'actionlib_msgs/GoalStatusArray'
+    });
 
-  var statusListener = new Topic({
-    ros : this.ros,
-    name : this.serverName + '/status',
-    messageType : 'actionlib_msgs/GoalStatusArray'
-  });
+    const resultListener = new Topic({
+      ros : this.ros,
+      name : this.serverName + '/result',
+      messageType : this.actionName + 'Result'
+    });
 
-  var resultListener = new Topic({
-    ros : this.ros,
-    name : this.serverName + '/result',
-    messageType : this.actionName + 'Result'
-  });
+    goalListener.subscribe((goalMessage) => {
+      this.emit('goal', goalMessage);
+    });
 
-  goalListener.subscribe(function(goalMessage) {
-      that.emit('goal', goalMessage);
-  });
-
-  statusListener.subscribe(function(statusMessage) {
-      statusMessage.status_list.forEach(function(status) {
-          that.emit('status', status);
+    statusListener.subscribe((statusMessage) => {
+      statusMessage.status_list.forEach((status) => {
+        this.emit('status', status);
       });
-  });
+    });
 
-  feedbackListener.subscribe(function(feedbackMessage) {
-      that.emit('status', feedbackMessage.status);
-      that.emit('feedback', feedbackMessage.feedback);
-  });
+    feedbackListener.subscribe((feedbackMessage) => {
+      this.emit('status', feedbackMessage.status);
+      this.emit('feedback', feedbackMessage.feedback);
+    });
 
-  // subscribe to the result topic
-  resultListener.subscribe(function(resultMessage) {
-      that.emit('status', resultMessage.status);
-      that.emit('result', resultMessage.result);
-  });
-
+    // subscribe to the result topic
+    resultListener.subscribe((resultMessage) => {
+      this.emit('status', resultMessage.status);
+      this.emit('result', resultMessage.result);
+    });
+  }
 }
-
-ActionListener.prototype.__proto__ = EventEmitter2.prototype;
 
 export default ActionListener;

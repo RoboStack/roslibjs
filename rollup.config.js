@@ -17,7 +17,8 @@ const babelrc = {
         bugfixes: true,
       }
     ]
-  ]
+  ],
+  plugins: ["@babel/plugin-proposal-class-properties"]
 };
 
 export default [

@@ -17,73 +17,72 @@ import EventEmitter2 from 'events';
  *   * actionClient - the ROSLIB.ActionClient to use with this goal
  *   * goalMessage - The JSON object containing the goal for the action server
  */
-function Goal(options) {
-  var that = this;
-  this.actionClient = options.actionClient;
-  this.goalMessage = options.goalMessage;
-  this.isFinished = false;
+class Goal extends EventEmitter2 {
+  constructor(options) {
+    super();
+    this.actionClient = options.actionClient;
+    this.goalMessage = options.goalMessage;
+    this.isFinished = false;
 
-  // Used to create random IDs
-  var date = new Date();
+    // Used to create random IDs
+    const date = new Date();
 
-  // Create a random ID
-  this.goalID = 'goal_' + Math.random() + '_' + date.getTime();
-  // Fill in the goal message
-  this.goalMessage = new Message({
-    goal_id : {
-      stamp : {
-        secs : 0,
-        nsecs : 0
+    // Create a random ID
+    this.goalID = 'goal_' + Math.random() + '_' + date.getTime();
+    // Fill in the goal message
+    this.goalMessage = new Message({
+      goal_id : {
+        stamp : {
+          secs : 0,
+          nsecs : 0
+        },
+        id : this.goalID
       },
-      id : this.goalID
-    },
-    goal : this.goalMessage
-  });
+      goal : this.goalMessage
+    });
 
-  this.on('status', function(status) {
-    that.status = status;
-  });
+    this.on('status', (status) => {
+      this.status = status;
+    });
 
-  this.on('result', function(result) {
-    that.isFinished = true;
-    that.result = result;
-  });
+    this.on('result', (result) => {
+      this.isFinished = true;
+      this.result = result;
+    });
 
-  this.on('feedback', function(feedback) {
-    that.feedback = feedback;
-  });
+    this.on('feedback', (feedback) => {
+      this.feedback = feedback;
+    });
 
-  // Add the goal
-  this.actionClient.goals[this.goalID] = this;
-}
-
-Goal.prototype.__proto__ = EventEmitter2.prototype;
-
-/**
- * Send the goal to the action server.
- *
- * @param timeout (optional) - a timeout length for the goal's result
- */
-Goal.prototype.send = function(timeout) {
-  var that = this;
-  that.actionClient.goalTopic.publish(that.goalMessage);
-  if (timeout) {
-    setTimeout(function() {
-      if (!that.isFinished) {
-        that.emit('timeout');
-      }
-    }, timeout);
+    // Add the goal
+    this.actionClient.goals[this.goalID] = this;
   }
-};
 
-/**
- * Cancel the current goal.
- */
-Goal.prototype.cancel = function() {
-  var cancelMessage = new Message({
-    id : this.goalID
-  });
-  this.actionClient.cancelTopic.publish(cancelMessage);
-};
+  /**
+   * Send the goal to the action server.
+   *
+   * @param timeout (optional) - a timeout length for the goal's result
+   */
+  send = (timeout) => {
+    this.actionClient.goalTopic.publish(this.goalMessage);
+    if (timeout) {
+      setTimeout(() => {
+        if (!this.isFinished) {
+          this.emit('timeout');
+        }
+      }, timeout);
+    }
+  };
+
+  /**
+   * Cancel the current goal.
+   */
+  cancel = () => {
+    const cancelMessage = new Message({
+      id : this.goalID
+    });
+    this.actionClient.cancelTopic.publish(cancelMessage);
+  };
+}
 
 export default Goal;

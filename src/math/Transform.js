@@ -14,20 +14,22 @@ import Quaternion from './Quaternion';
  *   * translation - the Vector3 describing the translation
  *   * rotation - the ROSLIB.Quaternion describing the rotation
  */
-function Transform(options) {
-  options = options || {};
-  // Copy the values into this object if they exist
-  this.translation = new Vector3(options.translation);
-  this.rotation = new Quaternion(options.rotation);
-}
+class Transform {
+  constructor(options) {
+    options = options || {};
+    // Copy the values into this object if they exist
+    this.translation = new Vector3(options.translation);
+    this.rotation = new Quaternion(options.rotation);
+  }
 
-/**
- * Clone a copy of this transform.
- *
- * @returns the cloned transform
- */
-Transform.prototype.clone = function() {
-  return new Transform(this);
-};
+  /**
+   * Clone a copy of this transform.
+   *
+   * @returns the cloned transform
+   */
+  clone = () => {
+    return new Transform(this);
+  };
+}
 
 export default Transform;
